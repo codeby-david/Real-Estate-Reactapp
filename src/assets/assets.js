@@ -6,6 +6,9 @@ import star_icon from './star_icon.svg'
 import left_arrow from './left_arrow.svg'
 import right_arrow from './right_arrow.svg'
 import header_img from './header_img.png'
+import header_img2 from './header_img2.png'
+import header_img3 from './header_img3.png'
+import header_img4 from './header_img4.png'
 import brand_img from './brand_img.png'
 import project_img_1 from './project_img_1.jpg'
 import project_img_2 from './project_img_2.jpg'
@@ -24,6 +27,9 @@ export const assets = {
     menu_icon,
     star_icon,
     header_img,
+    header_img2,
+    header_img3,
+    header_img4,
     brand_img,
     project_img_1,
     project_img_2,
@@ -36,38 +42,38 @@ export const assets = {
 export const projectsData = [
     {
       title: "Skyline Haven",
-      price: "$2,50,000",
-      location: "California",
+      price: "Ksh2,50,000",
+      location: "Mombasa",
       image: project_img_1
     },
     {
       title: "Vista Verde",
-      price: "$2,50,000",
-      location: "San Francisco",
+      price: "Ksh2,50,000",
+      location: "Nyeri",
       image: project_img_2
     },
     {
       title: "Serenity Suites",
-      price: "$2,50,000",
-      location: "Chicago",
+      price: "Ksh2,50,000",
+      location: "Nairobi",
       image: project_img_3
     },
     {
       title: "Central Square",
-      price: "$2,50,000",
-      location: "Los Angeles",
+      price: "Ksh2,50,000",
+      location: "Kiambu",
       image: project_img_4
     },
     {
       title: "Vista Verde",
-      price: "$2,50,000",
-      location: "San Francisco",
+      price: "Ksh2,50,000",
+      location: "Eldoret",
       image: project_img_5
     },
     {
       title: "Serenity Suites",
-      price: "$2,50,000",
-      location: "Chicago",
+      price: "Ksh2,50,000",
+      location: "Nakuru",
       image: project_img_6
     },
     
