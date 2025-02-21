@@ -1,54 +1,61 @@
-{/*import React from 'react'
-import { assets, testimonialsData } from '../assets/assets'
-
-const Testimonials = () => {
-  return (
-    <div className='container mx-auto py-10 sm:px-5 lg:px-2 w-full overflow-hidden' id='Testimonials'>
-      <h1 className='text-2xl sm:text-4xl font-bold mb-2 text-center'>
-        Customer
-         <span className='underline underline-offset-4 decoration-1 under font-light'> Testimonials</span>
-      </h1>
-      <p className='text-center text-gray-500 mb-12 max-w-80 mx-auto'>Real Stories from Those who found Home with Us</p>
-
-        <div className='flex flex-wrap justify-center gap-3'>
-          {testimonialsData.map((testimonial, index)=>(
-            <div key={index} className='max-w-[340px] border shadow-lg rounded px-8 py-12 text-center'>
-              <img className='w-20 h-20 rounded-full mx-auto mb-4' src={testimonial.image} alt={testimonial.alt} />
-              <h2 className='text-xl text-gray-700 font-medium'>{testimonial.name}</h2>
-              <p className='text-gray-500 mb-4 text-sm'>{testimonial.title}</p>
-              <div className='flex justify-center gap-1 text-red-500 mb-4'>
-                {Array.from({length: testimonial.rating},(item, index)=>(
-                <img key={index} src={assets.star_icon} alt="" />
-                ))}
-              </div>
-              <p className='text-gray-600'>{testimonial.text}</p>
-          </div>
-          ))}
-      </div>
-    </div>
-  )
-}
-
-export default Testimonials
-*/}
 import React from 'react';
+import { motion } from 'framer-motion';
 import { assets, testimonialsData } from '../assets/assets';
 
 const Testimonials = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3, // Delay between children animations
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+
   return (
     <div className='container mx-auto py-20 sm:px-5 lg:px-2 w-full overflow-hidden' id='Testimonials'>
-      <h1 className='text-3xl sm:text-5xl font-bold mb-4 text-center text-gray-800'>
-        Customer
-        <span className='underline underline-offset-8 decoration-2 decoration-red-500 font-light'> Testimonials</span>
-      </h1>
-      <p className='text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg'>
-        Real Stories from Those Who Found Home with Us
-      </p>
+      {/* Heading Section */}
+      <motion.div
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.5 }}
+        variants={containerVariants}
+        className='text-center mb-16'
+      >
+        <motion.h1
+          variants={itemVariants}
+          className='text-3xl sm:text-5xl font-bold mb-4 text-gray-800'
+        >
+          Customer
+          <span className='underline underline-offset-8 decoration-2 decoration-red-500 font-light'> Testimonials</span>
+        </motion.h1>
+        <motion.p
+          variants={itemVariants}
+          className='text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg'
+        >
+          Real Stories from Those Who Found Home with Us
+        </motion.p>
+      </motion.div>
 
-      <div className='flex flex-wrap justify-center gap-8'>
+      {/* Testimonial Cards */}
+      <motion.div
+        initial='hidden'
+        whileInView='visible'
+        viewport={{ once: true, amount: 0.5 }}
+        variants={containerVariants}
+        className='flex flex-wrap justify-center gap-8'
+      >
         {testimonialsData.map((testimonial, index) => (
-          <div
+          <motion.div
             key={index}
+            variants={itemVariants}
             className='max-w-[360px] border border-gray-200 shadow-xl rounded-lg px-8 py-10 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl'
           >
             <img
@@ -64,9 +71,9 @@ const Testimonials = () => {
               ))}
             </div>
             <p className='text-gray-700 leading-relaxed'>{testimonial.text}</p>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

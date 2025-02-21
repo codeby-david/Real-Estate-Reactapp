@@ -41,13 +41,13 @@ export const assets = {
 
 export const projectsData = [
     {
-      title: "Skyline Haven",
+      title: "Big Star",
       price: "Ksh2,50,000",
       location: "Mombasa",
       image: project_img_1
     },
     {
-      title: "Vista Verde",
+      title: "Sadlin Suites",
       price: "Ksh2,50,000",
       location: "Nyeri",
       image: project_img_2
@@ -81,27 +81,27 @@ export const projectsData = [
 
   export const testimonialsData = [
     {
-        name: "Donald Jackman",
+        name: "Alex Kamau",
         title: "Marketing Manager",
         image: profile_img_1,
         alt: "Portrait of Donald Jackman",
         rating: 5,
-        text: "From the very first meeting, they understood my vision and helped me find the perfect property. Their attention to detail and commitment to client satisfaction is unmatched."
+        text: "I couldn't have asked for a better experience! The team at this company made the entire home-buying process seamless and stress-free. They listened to my needs, found the perfect home within my budget, and guided me through every step. I highly recommend their services to anyone looking to buy or sell a property!"
     },
     {
         name: "Richard Nelson",
-        title: "UI/UX Designer",
+        title: "Real Estate Investor",
         image: profile_img_2,
         alt: "Portrait of Richard Nelson",
         rating: 4,
-        text: "From the very first meeting, they understood my vision and helped me find the perfect property. Their attention to detail and commitment to client satisfaction is unmatched."
+        text: "Working with this company has been a game-changer for my investment portfolio. Their market insights and negotiation skills helped me secure properties at incredible prices. They’re professional, knowledgeable, and always go the extra mile. If you’re serious about real estate, these are the people you want on your side!"
     },
     {
-        name: "James Washington",
-        title: "Co-Founder",
+        name: "James Macharia",
+        title: "Home Seller",
         image: profile_img_3,
         alt: "Portrait of James Washington",
         rating: 5,
-        text: "From the very first meeting, they understood my vision and helped me find the perfect property. Their attention to detail and commitment to client satisfaction is unmatched."
+        text: "Selling my home felt overwhelming at first, but [Your Real Estate Company] made it so easy! They staged my home beautifully, marketed it effectively, and got me multiple offers above asking price. The entire process was smooth, and I felt supported every step of the way. Thank you for exceeding my expectations!"
     }
 ];
