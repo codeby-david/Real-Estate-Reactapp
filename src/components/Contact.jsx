@@ -10,7 +10,8 @@ const Contact = () => {
     setResult('Sending....');
     const formData = new FormData(event.target);
 
-    formData.append('access_key', 'a381c37a-2581-475a-933c-47ca76b48f75');
+    // Use the environment variable for the access key
+    formData.append('access_key', import.meta.env.VITE_WEB3_API_KEY);
 
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
