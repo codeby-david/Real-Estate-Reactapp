@@ -41,7 +41,7 @@ Clone the repository:
 
 bash
 Copy
-git clone https://github.com/codeby-david/REALESTATE-website.git
+git clone https://github.com/codeby-david/Real-Esate-Reactapp.git
 cd real-estate-website
 Install dependencies:
 
