@@ -1,6 +1,5 @@
 Real Estate Website
-Welcome to the Real Estate Website repository! This project is a modern, responsive, and interactive real estate platform built using cutting-edge technologies like React.js, Web3 Forms API, Framer Motion, and Tailwind CSS. Whether you're a developer, contributor, or just curious, this README will guide you through the project.
-
+Welcome to the Real Estate Website repository! This project is a modern, responsive, and interactive real estate platform built using cutting-edge technologies like React.js, Web3 Forms API, Framer Motion, and Tailwind CSS.
 Real Estate Website Demo
 ![Screenshot 2025-02-21 090811](https://github.com/user-attachments/assets/cf6f591f-9112-42da-ac53-c277e4b41bd5)
 
