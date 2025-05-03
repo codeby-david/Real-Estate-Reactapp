@@ -1,102 +1,101 @@
-{/*}
-import React, { useEffect, useState } from 'react'
-
-import { assets } from '../assets/assets'
-
-const Navbar = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
-
-  useEffect(() => {
-    if(showMobileMenu) {
-      document.body.style.overflow = 'hidden'
-    }
-    else {
-      document.body.style.overflow = 'auto'
-    }
-    return ()=>{
-      document.body.style.overflow = 'auto'
-    };
-  },[showMobileMenu])
-  return (
-    <div className='absolute top-0 left-0 w-full z-10'>
-      <div className='container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32 bg-transparent'>
-        <img src={assets.logo} alt="nnn" />
-        <ul className='hidden md:flex space-x-8 text-white'>
-          <a href="#Header" className='cursor-pointer hover:text-gray-400'>Home</a>
-           <a href="#About" className='cursor-pointer hover:text-gray-400'>About</a>
-            <a href="#Projects" className='cursor-pointer hover:text-gray-400'>Projects</a>
-             <a href="#Testimonials" className='cursor-pointer hover:text-gray-400'>Testimonials</a>
-        </ul>
-        <button className='hidden md:block bg-white px-8 py-2 rounded-full cursor-pointer'>Sign Up</button>
-        <img onClick={ ()=>setShowMobileMenu(true) }src={assets.menu_icon} className='md:hidden w-7 cursor-pointer' alt="" />
-     
-      </div
-       {/*-----mobile
-       <div className={`md:hidden ${showMobileMenu ? 'fixed w-full ': 'h-0 w-0'}right-0 top-0 bottom-0 overflow-hidden bg-white trasition-all`}>
-        <div className='flex justify-end p-6 cursor-poiner' >
-          <img onClick={ ()=>setShowMobileMenu(false) }src={assets.cross_icon} className='w-6' alt="" />
-        </div>
-        <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
-          <a onClick={ ()=>setShowMobileMenu(false) } href="#Header" className='px-4 py-2 rounded-full inline-block'>Home</a>
-           <a onClick={ ()=>setShowMobileMenu(false) } href="#About" className='px-4 py-2 rounded-full inline-block'>About</a>
-            <a onClick={()=>setShowMobileMenu(false)} href="#Projects" className='px-4 py-2 rounded-full inline-block'>Projects</a>
-             <a onClick={()=>setShowMobileMenu(false)} href="#Testimonials" className='px-4 py-2 rounded-full inline-block'>Testimonials</a>
-        </ul>
-       </div>
-    </div>
-  )
-}
-
-export default Navbar
-*/}
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { assets } from '../assets/assets';
+import SignUpModal from './SignUpModal';
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (showMobileMenu) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
+    document.body.style.overflow = showMobileMenu ? 'hidden' : 'auto';
+    return () => { document.body.style.overflow = 'auto'; };
   }, [showMobileMenu]);
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const openSignUpModal = () => {
+    setShowSignUpModal(true);
+    setShowMobileMenu(false);
+  };
+
   return (
-    <div className='absolute top-0 left-0 w-full z-10'>
-      <div className='container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32 bg-transparent'>
-        <img src={assets.logo} alt="Logo" />
-        <ul className='hidden md:flex space-x-8 text-white'>
-          <a href="#Header" className='cursor-pointer hover:text-gray-400'>Home</a>
-          <a href="#About" className='cursor-pointer hover:text-gray-400'>About</a>
-          <a href="#Projects" className='cursor-pointer hover:text-gray-400'>Projects</a>
-          <a href="#Testimonials" className='cursor-pointer hover:text-gray-400'>Testimonials</a>
-        </ul>
-        <button className='hidden md:block bg-white px-8 py-2 rounded-full cursor-pointer'>Sign Up</button>
-        <button onClick={() => setShowMobileMenu(true)} aria-label="Open menu" className='md:hidden'>
-          <img src={assets.menu_icon} className='w-7 cursor-pointer' alt="Menu" />
-        </button>
+    <>
+      <div className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+        <div className='container mx-auto flex justify-between items-center px-6 md:px-20 lg:px-32'>
+          <a href="#Header" className='flex items-center'>
+            <img 
+              src={assets.logo} 
+              alt="Company Logo" 
+              className={`h-10 ${isScrolled ? '' : 'brightness-0 invert'}`} 
+            />
+          </a>
+
+          <ul className='hidden md:flex space-x-8'>
+            <li><a href="#Header" className={`font-medium ${isScrolled ? 'text-gray-800 hover:text-blue-600' : 'text-white hover:text-gray-300'} transition`}>Home</a></li>
+            <li><a href="#About" className={`font-medium ${isScrolled ? 'text-gray-800 hover:text-blue-600' : 'text-white hover:text-gray-300'} transition`}>About</a></li>
+            <li><a href="#Projects" className={`font-medium ${isScrolled ? 'text-gray-800 hover:text-blue-600' : 'text-white hover:text-gray-300'} transition`}>Projects</a></li>
+            <li><a href="#Testimonials" className={`font-medium ${isScrolled ? 'text-gray-800 hover:text-blue-600' : 'text-white hover:text-gray-300'} transition`}>Testimonials</a></li>
+          </ul>
+
+          <button
+            onClick={openSignUpModal}
+            className={`hidden md:block px-6 py-2 rounded-full font-medium transition ${isScrolled ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-white text-gray-800 hover:bg-gray-100'}`}
+          >
+            Sign Up
+          </button>
+
+          <button 
+            onClick={() => setShowMobileMenu(true)}
+            className='md:hidden focus:outline-none'
+            aria-label="Open menu"
+          >
+            <img 
+              src={assets.menu_icon} 
+              className={`w-7 ${isScrolled ? '' : 'brightness-0 invert'}`} 
+              alt="Menu" 
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden ${showMobileMenu ? 'fixed inset-0 bg-white transition-all duration-300' : 'h-0 w-0 overflow-hidden'} z-20`}>
-        <div className='flex justify-end p-6'>
-          <button onClick={() => setShowMobileMenu(false)} aria-label="Close menu" className='cursor-pointer'>
-            <img src={assets.cross_icon} className='w-6' alt="Close" />
-          </button>
+      <div className={`md:hidden fixed inset-0 bg-white z-50 transition-all duration-300 ease-in-out ${showMobileMenu ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className='container mx-auto px-6 py-4'>
+          <div className='flex justify-between items-center'>
+            <img src={assets.logo} alt="Company Logo" className='h-10' />
+            <button 
+              onClick={() => setShowMobileMenu(false)}
+              className='focus:outline-none'
+              aria-label="Close menu"
+            >
+              <img src={assets.cross_icon} className='w-6' alt="Close" />
+            </button>
+          </div>
+
+          <ul className='flex flex-col space-y-4 mt-10 text-lg font-medium'>
+            <li><a onClick={() => setShowMobileMenu(false)} href="#Header" className='block py-2 hover:text-blue-600 transition'>Home</a></li>
+            <li><a onClick={() => setShowMobileMenu(false)} href="#About" className='block py-2 hover:text-blue-600 transition'>About</a></li>
+            <li><a onClick={() => setShowMobileMenu(false)} href="#Projects" className='block py-2 hover:text-blue-600 transition'>Projects</a></li>
+            <li><a onClick={() => setShowMobileMenu(false)} href="#Testimonials" className='block py-2 hover:text-blue-600 transition'>Testimonials</a></li>
+            <li className='mt-6'>
+              <button
+                onClick={openSignUpModal}
+                className='w-full bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition'
+              >
+                Sign Up
+              </button>
+            </li>
+          </ul>
         </div>
-        <ul className='flex flex-col items-center gap-2 mt-5 px-5 text-lg font-medium'>
-          <a onClick={() => setShowMobileMenu(false)} href="#Header" className='px-4 py-2 rounded-full inline-block'>Home</a>
-          <a onClick={() => setShowMobileMenu(false)} href="#About" className='px-4 py-2 rounded-full inline-block'>About</a>
-          <a onClick={() => setShowMobileMenu(false)} href="#Projects" className='px-4 py-2 rounded-full inline-block'>Projects</a>
-          <a onClick={() => setShowMobileMenu(false)} href="#Testimonials" className='px-4 py-2 rounded-full inline-block'>Testimonials</a>
-        </ul>
       </div>
-    </div>
+
+      {showSignUpModal && <SignUpModal onClose={() => setShowSignUpModal(false)} />}
+    </>
   );
 };
 

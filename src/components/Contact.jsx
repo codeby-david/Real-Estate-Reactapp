@@ -17,6 +17,12 @@ const Contact = () => {
       method: 'POST',
       body: formData,
     });
+    if(fetch.success){
+      return response;
+
+    }else{
+      console.log("Connect to internet");
+    }
 
     const data = await response.json();
 

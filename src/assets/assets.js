@@ -102,6 +102,6 @@ export const projectsData = [
         image: profile_img_3,
         alt: "Portrait of James Washington",
         rating: 5,
-        text: "Selling my home felt overwhelming at first, but [Your Real Estate Company] made it so easy! They staged my home beautifully, marketed it effectively, and got me multiple offers above asking price. The entire process was smooth, and I felt supported every step of the way. Thank you for exceeding my expectations!"
+        text: "Selling my home felt overwhelming at first, but Estate Company made it so easy! They staged my home beautifully, marketed it effectively, and got me multiple offers above asking price. The entire process was smooth, and I felt supported every step of the way. Thank you for exceeding my expectations!"
     }
 ];
