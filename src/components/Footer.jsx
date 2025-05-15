@@ -35,7 +35,7 @@ const Footer = () => {
         >
           <img src={assets.logo_dark} alt='Company Logo' className='w-40' />
           <p className='text-gray-200 mt-4 text-sm leading-6'>
-            At our company, we are committed to helping you find the perfect property or sell your home with ease. Whether you're buying, selling, or investing, our experienced team is here to guide you every step of the way. Explore our listings, discover expert advice, and let us turn your real estate dreams into reality.
+            At our company, we are committed to helping you find the perfect property or sell your home with ease. Whether youre buying, selling, or investing, our experienced team is here to guide you every step of the way. Explore our listings, discover expert advice, and let us turn your real estate dreams into reality.
           </p>
         </motion.div>
 

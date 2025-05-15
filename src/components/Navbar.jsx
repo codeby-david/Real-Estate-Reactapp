@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { assets } from '../assets/assets';
 import SignUpModal from './SignUpModal';
+import React from 'react';
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);

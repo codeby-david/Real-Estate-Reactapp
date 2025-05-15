@@ -1,21 +1,33 @@
-
 import express from 'express';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+
+//const frontEndUrl= import.meta.env.FRONTEND_URL;
+const mongoUri = import.meta.MONGO_URI;
+const port = import.meta.PORT;
+const saltRound = import.meta.SALT_ROUNDS;
+const jwtSecret = import.meta.JWT_SECRET;
+dotenv.config();
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000', // Update with your frontend URL
+  origin: 'http://localhost:3000',
   credentials: true
 }));
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://signuppage:<db_password>@signu.amrbuq2.mongodb.net/?retryWrites=true&w=majority&appName=signU')
+mongoose.connect(mongoUri|| 'mongodb://localhost:27017/your-db', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+})
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
 
@@ -48,23 +60,31 @@ app.post('/api/auth/signup', async (req, res) => {
       return res.status(400).json({ message: 'Email already in use' });
     }
     
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const user = await User.create({ name, email, password: hashedPassword });
+    const saltRounds = parseInt(saltRound) || 12;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
     
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '7d' }
-    );
-    
-    res.status(201).json({ 
-      token, 
-      user: { 
-        id: user._id, 
-        name: user.name, 
-        email: user.email 
-      } 
-    });
+    try {
+      const user = await User.create({ name, email, password: hashedPassword });
+      const token = jwt.sign(
+        { id: user._id, email: user.email },
+        jwtSecret || 'your-secret-key',
+        { expiresIn: '7d' }
+      );
+      
+      res.status(201).json({ 
+        token, 
+        user: { 
+          id: user._id, 
+          name: user.name, 
+          email: user.email 
+        } 
+      });
+    } catch (error) {
+      if (error.code === 11000) {
+        return res.status(400).json({ message: 'Email already in use' });
+      }
+      throw error;
+    }
   } catch (error) {
     console.error('Signup error:', error);
     res.status(500).json({ message: 'Server error during signup' });
@@ -91,7 +111,7 @@ app.post('/api/auth/login', async (req, res) => {
     
     const token = jwt.sign(
       { id: user._id, email: user.email },
-      process.env.JWT_SECRET || 'your-secret-key',
+      jwtSecret || 'your-secret-key',
       { expiresIn: '7d' }
     );
     
@@ -109,8 +129,14 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
+// Fallback Error Handler
+app.use((err, req, res) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Something went wrong!' });
+});
+
 // Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = port  || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

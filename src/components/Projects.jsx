@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { assets, projectsData } from '../assets/assets';
+import React from 'react';
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

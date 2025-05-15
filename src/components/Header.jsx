@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Navbar from "./Navbar";
+import React from "react";
 
 const Header = () => {
   // Array of background image URLs (replace with your own images)
@@ -13,13 +14,13 @@ const Header = () => {
   ];
 
   // Array of text corresponding to each background image
-  const headerTexts = [
-    "Explore Homes that fit your Dreams", // Text for the first image
-    "Discover Your Perfect Home", // Text for the second image
-    "Find Your Dream Property", // Text for the third image
-    "Live in Luxury and Comfort", // Text for the fourth image
-    "Your Ideal Home Awaits You", // Text for the fifth image
-  ];
+  const headerTexts = useMemo(() => [
+    "Explore Homes that fit your Dreams",  // Text for the first image
+    "Discover Your Perfect Home",          // Text for the second image
+    "Find Your Dream Property",            // Text for the third image
+    "Live in Luxury and Comfort",          // Text for the fourth image
+    "Your Ideal Home Awaits You",          // Text for the fifth image
+  ], []);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentText, setCurrentText] = useState(headerTexts[0]);

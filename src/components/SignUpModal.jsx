@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import { useState,  } from 'react';
 import axios from 'axios';
 import { assets } from '../assets/assets';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const SignUpModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,9 @@ const SignUpModal = ({ onClose }) => {
     email: '',
     password: ''
   });
+  SignUpModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+  };
   const [isLogin, setIsLogin] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);

@@ -1,5 +1,5 @@
 // SignUp.jsx
-import React from 'react';
+//import React from 'react';
 
 const SignUp = () => {
   return (
